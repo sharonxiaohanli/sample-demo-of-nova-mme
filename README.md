@@ -1,4 +1,4 @@
-# Amazon Nova Multimodal Embedding Demo
+# Demo of Amazon Nova Multimodal Embedding (MME)
 
 This CDK-based demo showcases [Amazon Nova’s multimodal embedding](https://aws.amazon.com/blogs/aws/amazon-nova-multimodal-embeddings-now-available-in-amazon-bedrock/) capabilities in [Amazon Bedrock](https://aws.amazon.com/bedrock/), enabling unified search across text, images, video, and audio. The solution converts diverse media types into a shared vector space, allowing users to search for videos using text descriptions, find images through natural language queries, or discover audio clips via semantic similarity.
 
