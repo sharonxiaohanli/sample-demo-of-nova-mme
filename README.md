@@ -1,8 +1,20 @@
 # Demo of Amazon Nova Multimodal Embedding (MME)
 
-This CDK-based demo showcases [Amazon Nova’s multimodal embedding](https://aws.amazon.com/blogs/aws/amazon-nova-multimodal-embeddings-now-available-in-amazon-bedrock/) capabilities in [Amazon Bedrock](https://aws.amazon.com/bedrock/), enabling unified search across text, images, video, and audio. The solution converts diverse media types into a shared vector space, allowing users to search for videos using text descriptions, find images through natural language queries, or discover audio clips via semantic similarity.
+> This solution is available as a CDK package and can be deployed to your AWS account by running just a few simple scripts.
 
-The demo includes an interactive web interface where you can upload multimedia files, perform cross-modal searches, and experience how embeddings power intelligent content discovery across different modalities — all built and deployed through an AWS CDK package for easy setup in your own AWS environment.
+This demo showcases [Amazon Nova’s multimodal embedding](https://aws.amazon.com/blogs/aws/amazon-nova-multimodal-embeddings-now-available-in-amazon-bedrock/) capabilities in [Amazon Bedrock](https://aws.amazon.com/bedrock/), enabling unified search across text, images, video, and audio. 
+
+The demo includes an interactive web interface where you can upload multimedia files, perform cross-modal searches, and experience how embeddings power intelligent content discovery across different modalities.
+
+## Table of Contents
+
+- [Demo Recording](#demo-recording)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
+- [Deployment Steps](#deployment-steps)
+- [Deployment Validation](#deployment-validation)
+- [Running the Guidance](#running-the-guidance)
+- [Cleanup](#cleanup)
 
 ## Demo recording
 ![nova-mme-demo](./assets/nova-mme-demo.gif)
@@ -16,14 +28,11 @@ Nova MME is built on a modern serverless architecture using AWS services for sca
 ### Core Components
 
 - **Frontend:** React-based web application providing an intuitive interface for uploading media and performing searches
-- **API Gateway:** RESTful API endpoints for secure communication between frontend and backend services
-- **Lambda Functions:** Serverless compute layer handling media processing, embedding generation, and search operations
-- **S3 Storage:** Scalable object storage for media files (videos, images, audio, documents)
-- **S3 Vectors:** Serverless vector storage for efficient similarity search across embeddings
-
-### AI/ML Services
-
-- **Amazon Nova:** Multi-modal embedding generation that converts text, images, video, and audio into a unified 1024-dimensional vector space
+- **Amazo API Gateway:** RESTful API endpoints for secure communication between frontend and backend services
+- **AWS Lambda Functions:** Serverless compute layer handling media processing, embedding generation, and search operations
+- **Amazon DynamoDB:** Store the MME task metadata
+- **Amazon S3:** Scalable object storage for media files (videos, images, audio, documents)
+- **Amazon S3 Vectors:** Serverless vector storage for efficient similarity search across embeddings
 - **Amazon Bedrock:** Foundation model access providing the underlying AI capabilities for embedding generation and semantic understanding
 
 ### Multi-Modal Embedding Process
@@ -118,9 +127,7 @@ Once the deployment completes, you can find the website URL in the bash console.
 ## Running the Guidance
 - If you provided one or more email addresses through the environment variable `CDK_INPUT_USER_EMAILS` during setup, an email containing a username and temporary password will be sent to those addresses as part of the deployment process. Users can use these credentials to sign in to the web portal.
 
-- If you instead specified a username using `CDK_INPUT_USER_NAME`, you can log in to the web portal using that username and the password displayed in the CloudFormation output. This method bypasses Cognito’s email notification and password reset flow, making it suitable for workshop scenarios.
-
-- If neither `CDK_INPUT_USER_EMAILS` nor `CDK_INPUT_USER_NAME` was set, you will need to manually create a user by navigating to the Cognito console and adding a user to the **nova-mme-user-pool**.
+- If `CDK_INPUT_USER_EMAILS` was set, you will need to manually create a user by navigating to the Cognito console and adding a user to the **nova-mme-user-pool**.
 
 ## Cleanup
 
